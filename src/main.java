@@ -21,7 +21,7 @@ public class Main {
                 System.out.println("Kata pertama tidak ditemukan dalam kamus!");
             }
 
-            System.out.print("Masukkan kata pertama: ");
+            System.out.print("Masukkan kata pertama : ");
             startWord = scanner.nextLine().trim().toLowerCase();
             wordLength = startWord.length();
             wordsReader = new WordsReader();
@@ -49,7 +49,7 @@ public class Main {
                 System.out.println("Kata kedua tidak ditemukan dalam kamus!");
             }
 
-            System.out.print("Masukkan kata kedua: ");
+            System.out.print("Masukkan kata kedua   : ");
             endWord = scanner.nextLine().trim().toLowerCase();
             valid = checkWords(startWord, endWord);
 

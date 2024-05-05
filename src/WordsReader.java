@@ -12,6 +12,14 @@ public class WordsReader {
     public WordsReader(){
         this.words = new HashMap<>();
     }
+    
+    public Map<String, List<String>> getWords(){
+        return this.words;
+    }
+
+    public void setWords(Map<String, List<String>> words){
+        this.words = words;
+    }
 
     public void mapWords(int wordLength){
         String fileName = "datastore/length_" + wordLength + ".txt";
@@ -33,9 +41,4 @@ public class WordsReader {
             e.printStackTrace();
         }
     }
-
-    public Map<String, List<String>> getWords(){
-        return this.words;
-    }
-
 }

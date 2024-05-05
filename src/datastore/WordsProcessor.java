@@ -18,8 +18,20 @@ public class WordsProcessor {
         this.fileName = fileName;
     }
 
+    public String getFileName(){
+        return this.fileName;
+    }
+
     public List<List<String>> getListOfWords(){
         return this.listOfWords;
+    }
+
+    public void setFileName(String fileName){
+        this.fileName = fileName;
+    }
+
+    public void setListOfWords(List<List<String>> listOfWords){
+        this.listOfWords = listOfWords;
     }
 
     public void createListOfWords() {
@@ -92,7 +104,7 @@ public class WordsProcessor {
     public static void main(String[] args){
         WordsProcessor WP = new WordsProcessor("words_alpha.txt");
         WP.createListOfWords();
-        List<List<String>> listOfWords = WP.getListOfWords();
+        // List<List<String>> listOfWords = WP.getListOfWords();
         Map<String, List<String>> mapOfWords = WP.createMapOfWords();
         WP.saveListOfWords(mapOfWords);
         // for (int i = 0; i < listOfWords.size(); i++){

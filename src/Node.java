@@ -1,5 +1,5 @@
-import java.util.Queue;
-import java.util.PriorityQueue;
+// import java.util.Queue;
+// import java.util.PriorityQueue;
 
 public class Node implements Comparable<Node>{
     private String parent;
@@ -47,7 +47,7 @@ public class Node implements Comparable<Node>{
     }
 
     public void printNode(){
-        System.out.print(this.word + " " + this.cost);
+        System.out.print(this.parent + " " + this.word + " " + this.cost);
     }
 
     // public static void main(String[] args) {

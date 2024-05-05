@@ -1,21 +1,54 @@
 import java.util.List;
 import java.util.Queue;
-import java.util.PriorityQueue;
+// import java.util.PriorityQueue;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Iterator;
+// import java.util.Iterator;
+import java.lang.Math;
 
 public class WordLadder {
     private String startWord;
     private String endWord;
     private String algorithm;
     private Map<String, List<String>> wordList;
-
+    
     public WordLadder(String startWord, String endWord, String algorithm, Map<String, List<String>> wordList) {
         this.startWord = startWord;
         this.endWord = endWord;
         this.algorithm = algorithm;
+        this.wordList = wordList;
+    }
+    
+    public String getStartWord(){
+        return this.startWord;
+    }
+    
+    public String getEndWord(){
+        return this.endWord;
+    }
+    
+    public String getAlgorithm(){
+        return this.algorithm;
+    }
+
+    public Map<String, List<String>> getWordList(){
+        return this.wordList;
+    }
+
+    public void setStartWord(String startWord){
+        this.startWord = startWord;
+    }
+
+    public void setEndWord(String endWord){
+        this.endWord = endWord;
+    }
+
+    public void setAlgorithm(String algorithm){
+        this.algorithm = algorithm;
+    }
+
+    public void setWordList(Map<String, List<String>> wordList){
         this.wordList = wordList;
     }
 
@@ -36,7 +69,7 @@ public class WordLadder {
         
         if (this.algorithm.equals("3") || this.algorithm.equals("A*") || this.algorithm.equals("A* Search")
             || (this.algorithm.equals("4")) || (this.algorithm.equals("Ketiganya"))){
-            System.out.println("Mencari dengan algoritma A Star");
+            System.out.println("Mencari dengan algoritma A*");
             findPathAStar();
             System.out.println();
         }
@@ -51,6 +84,8 @@ public class WordLadder {
         int nodeVisited = 0;
         
         long startTime = System.nanoTime();
+        Runtime runtime = Runtime.getRuntime();
+        long before = runtime.totalMemory() - runtime.freeMemory();
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
@@ -72,10 +107,14 @@ public class WordLadder {
                     }
                     System.out.print(shortestPath.get(j));
                 }
+
+                long after = runtime.totalMemory() - runtime.freeMemory();
                 
-                System.out.println("\nLangkah: " + (shortestPath.size() - 1));
-                System.out.println("Kata dikunjungi: " + nodeVisited);
-                System.out.println("Execution time: " + (endTime - startTime) / 1000 + " microdetik");
+                System.out.println();
+                System.out.println("Langkah         : " + (shortestPath.size() - 1));
+                System.out.println("Kata dikunjungi : " + nodeVisited);
+                System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
+                System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
                 return;
             }
             
@@ -122,6 +161,10 @@ public class WordLadder {
         }
         
         System.out.println("Path not found!");
+        long endTime = System.nanoTime();
+        long after = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
+        System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
     }
 
     public void findPathGBFS(){
@@ -133,6 +176,8 @@ public class WordLadder {
         int nodeVisited = 0;
         
         long startTime = System.nanoTime();
+        Runtime runtime = Runtime.getRuntime();
+        long before = runtime.totalMemory() - runtime.freeMemory();
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
@@ -154,10 +199,14 @@ public class WordLadder {
                     }
                     System.out.print(shortestPath.get(j));
                 }
+
+                long after = runtime.totalMemory() - runtime.freeMemory();
                 
-                System.out.println("\nLangkah: " + (shortestPath.size() - 1));
-                System.out.println("Kata dikunjungi: " + nodeVisited);
-                System.out.println("Execution time: " + (endTime - startTime) / 1000 + " microdetik");
+                System.out.println();
+                System.out.println("Langkah         : " + (shortestPath.size() - 1));
+                System.out.println("Kata dikunjungi : " + nodeVisited);
+                System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
+                System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
                 return;
             }
             
@@ -204,6 +253,10 @@ public class WordLadder {
         }
         
         System.out.println("Path not found!");
+        long endTime = System.nanoTime();
+        long after = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
+        System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
     }
 
     public void findPathAStar(){
@@ -215,6 +268,8 @@ public class WordLadder {
         int nodeVisited = 0;
         
         long startTime = System.nanoTime();
+        Runtime runtime = Runtime.getRuntime();
+        long before = runtime.totalMemory() - runtime.freeMemory();
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
@@ -236,10 +291,14 @@ public class WordLadder {
                     }
                     System.out.print(shortestPath.get(j));
                 }
+
+                long after = runtime.totalMemory() - runtime.freeMemory();
                 
-                System.out.println("\nLangkah: " + (shortestPath.size() - 1));
-                System.out.println("Kata dikunjungi: " + nodeVisited);
-                System.out.println("Execution time: " + (endTime - startTime) / 1000 + " microdetik");
+                System.out.println();
+                System.out.println("Langkah         : " + (shortestPath.size() - 1));
+                System.out.println("Kata dikunjungi : " + nodeVisited);
+                System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
+                System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
                 return;
             }
             
@@ -286,44 +345,51 @@ public class WordLadder {
         }
         
         System.out.println("Path not found!");
+        long endTime = System.nanoTime();
+        long after = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
+        System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
     }
     
     public float getUCSCost(String nextWord){
-        float cost = 0;
+        float g = 0;
 
         for (int i = 0; i < startWord.length(); i++){
-            if (startWord.charAt(i) != nextWord.charAt(i))
-                cost++;
+            if (startWord.charAt(i) != nextWord.charAt(i)){
+                g++;
+            }
         }
 
-        return cost;
+        return g;
     }
 
     public float getGBFSCost(String nextWord){
-        float cost = 0;
+        float h = 0;
         
         for (int i = 0; i < endWord.length(); i++){
-            if (endWord.charAt(i) != nextWord.charAt(i))
-            cost++;
+            if (endWord.charAt(i) != nextWord.charAt(i)){
+                h++;
+            }
         }
         
-        return cost;
+        return h;
     }
     
     public float getAStarCost(String nextWord){
-        float cost = 0;
-
-        for (int i = 0; i < startWord.length(); i++){
-            if (startWord.charAt(i) != nextWord.charAt(i))
-                cost++;
-        }
+        float g = getUCSCost(nextWord);
+        
+        float h = 0;
 
         for (int i = 0; i < endWord.length(); i++){
-            if (endWord.charAt(i) != nextWord.charAt(i))
-                cost++;
+            if (endWord.charAt(i) != nextWord.charAt(i)){
+                h++;
+            }
+            // if ((endWord.charAt(i) == nextWord.charAt(i)) && (startWord.charAt(i) != nextWord.charAt(i))){
+            //     h -= 1;
+            // }
         }
 
-        return cost;
+        return (g + h);
     }
 
     public List<String> findShortestPath(List<Node> Path){
@@ -368,17 +434,5 @@ public class WordLadder {
             }
         }
         return tempQueue;
-    }
-
-    public String getStartWord(){
-        return this.startWord;
-    }
-
-    public String getEndWord(){
-        return this.endWord;
-    }
-
-    public String getAlgorithm(){
-        return this.algorithm;
     }
 }
