@@ -5,11 +5,13 @@ public class Node implements Comparable<Node>{
     private String parent;
     private String word;
     private float cost;
+    private int depth;
 
-    public Node(String parent, String word, float cost){
+    public Node(String parent, String word, float cost, int depth){
         this.parent = parent;
         this.word = word;
         this.cost = cost;
+        this.depth = depth;
     }
 
     public String getParent(){
@@ -24,6 +26,10 @@ public class Node implements Comparable<Node>{
         return this.cost;
     }
 
+    public int getDepth(){
+        return this.depth;
+    }
+
     public void setParent(String parent){
         this.parent = parent;
     }
@@ -34,6 +40,10 @@ public class Node implements Comparable<Node>{
 
     public void setCost(float cost){
         this.cost = cost;
+    }
+
+    public void setDepth(int depth){
+        this.depth = depth;
     }
 
     public int compareTo(Node node){

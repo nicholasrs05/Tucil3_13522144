@@ -76,9 +76,9 @@ public class WordLadder {
     }
 
     public void findPathUCS(){
-        Queue<Node> queue = new LinkedList<>();
-        Node startNode = new Node(null, startWord, 0);
-        queue.offer(startNode);
+        List<Node> queue = new LinkedList<>();
+        Node startNode = new Node(null, startWord, 0, 0);
+        queue = enqueuePrio(queue, startNode);
         List<Node> path = new ArrayList<>();
         List<String> visited = new ArrayList<>();
         int nodeVisited = 0;
@@ -89,7 +89,7 @@ public class WordLadder {
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
-            Node node = queue.poll();
+            Node node = queue.remove(0);
             nodeVisited += 1;
             
             // menambahkan node ke path dan visited
@@ -124,38 +124,30 @@ public class WordLadder {
             // memeriksa seluruh tetangga
             for (int i = 0; i < neighbours.size(); i++){
                 // menghitung cost
-                float cost = getUCSCost(neighbours.get(i));
+                float cost = getUCSCost(node.getDepth(), neighbours.get(i));
                 
                 // loop queue untuk memeriksa apakah kata sudah ada pada queue, jika ada bandingkan cost-nya
                 boolean Enqueue = true;
+                int cnt = 0, idx = -1;
                 for (Node n : queue){
                     if (n.getWord().equals(neighbours.get(i))){
                         if (n.getCost() > cost){ // jika cost lebih kecil, ganti cost
-                            queue.remove(n);
+                            idx = cnt;
                             Enqueue = true;
                         } else { // jika cost lebih besar, tidak enqueue
                             Enqueue = false;
                         }
                     }
+                    cnt++;
                 }
-
-                for (int j = 0; j < path.size(); j++){
-                    if ((path.get(j).getWord().equals(neighbours.get(i))) && (cost < path.get(j).getCost())){
-                        path.get(j).setParent(node.getWord());
-                        path.get(j).setCost(cost);
-                    }
+                
+                if (idx != -1){
+                    queue.remove(idx);
                 }
                 
                 if (Enqueue && !visited.contains(neighbours.get(i))){
-                    Node newNode = new Node(node.getWord(), neighbours.get(i), cost);
-                    // queue.offer(newNode);
+                    Node newNode = new Node(node.getWord(), neighbours.get(i), cost, node.getDepth() + 1);
                     queue = enqueuePrio(queue, newNode);
-
-                    // for (Node n : queue){
-                    //     n.printNode();
-                    //     System.out.print(" | ");
-                    // }
-                    // System.out.println();
                 }
             }
         }
@@ -168,9 +160,9 @@ public class WordLadder {
     }
 
     public void findPathGBFS(){
-        Queue<Node> queue = new LinkedList<>();
-        Node startNode = new Node(null, startWord, 0);
-        queue.offer(startNode);
+        List<Node> queue = new LinkedList<>();
+        Node startNode = new Node(null, startWord, 0, 0);
+        queue = enqueuePrio(queue, startNode);
         List<Node> path = new ArrayList<>();
         List<String> visited = new ArrayList<>();
         int nodeVisited = 0;
@@ -181,7 +173,7 @@ public class WordLadder {
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
-            Node node = queue.poll();
+            Node node = queue.remove(0);
             nodeVisited += 1;
             
             // menambahkan node ke path dan visited
@@ -220,34 +212,26 @@ public class WordLadder {
                 
                 // loop queue untuk memeriksa apakah kata sudah ada pada queue, jika ada bandingkan cost-nya
                 boolean Enqueue = true;
+                int cnt = 0, idx = -1;
                 for (Node n : queue){
                     if (n.getWord().equals(neighbours.get(i))){
                         if (n.getCost() > cost){ // jika cost lebih kecil, ganti cost
-                            queue.remove(n);
+                            idx = cnt;
                             Enqueue = true;
                         } else { // jika cost lebih besar, tidak enqueue
                             Enqueue = false;
                         }
                     }
+                    cnt++;
                 }
-
-                for (int j = 0; j < path.size(); j++){
-                    if ((path.get(j).getWord().equals(neighbours.get(i))) && (cost < path.get(j).getCost())){
-                        path.get(j).setParent(node.getWord());
-                        path.get(j).setCost(cost);
-                    }
+                
+                if (idx != -1){
+                    queue.remove(idx);
                 }
                 
                 if (Enqueue && !visited.contains(neighbours.get(i))){
-                    Node newNode = new Node(node.getWord(), neighbours.get(i), cost);
-                    // queue.offer(newNode);
+                    Node newNode = new Node(node.getWord(), neighbours.get(i), cost, node.getDepth() + 1);
                     queue = enqueuePrio(queue, newNode);
-
-                    // for (Node n : queue){
-                    //     n.printNode();
-                    //     System.out.print(" | ");
-                    // }
-                    // System.out.println();
                 }
             }
         }
@@ -260,9 +244,9 @@ public class WordLadder {
     }
 
     public void findPathAStar(){
-        Queue<Node> queue = new LinkedList<>();
-        Node startNode = new Node(null, startWord, 0);
-        queue.offer(startNode);
+        List<Node> queue = new LinkedList<>();
+        Node startNode = new Node(null, startWord, 0, 0);
+        queue = enqueuePrio(queue, startNode);
         List<Node> path = new ArrayList<>();
         List<String> visited = new ArrayList<>();
         int nodeVisited = 0;
@@ -273,7 +257,7 @@ public class WordLadder {
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
-            Node node = queue.poll();
+            Node node = queue.remove(0);
             nodeVisited += 1;
             
             // menambahkan node ke path dan visited
@@ -308,38 +292,30 @@ public class WordLadder {
             // memeriksa seluruh tetangga
             for (int i = 0; i < neighbours.size(); i++){
                 // menghitung cost
-                float cost = getAStarCost(neighbours.get(i));
+                float cost = getAStarCost(node.getDepth(), neighbours.get(i));
                 
                 // loop queue untuk memeriksa apakah kata sudah ada pada queue, jika ada bandingkan cost-nya
                 boolean Enqueue = true;
+                int cnt = 0, idx = -1;
                 for (Node n : queue){
                     if (n.getWord().equals(neighbours.get(i))){
                         if (n.getCost() > cost){ // jika cost lebih kecil, ganti cost
-                            queue.remove(n);
+                            idx = cnt;
                             Enqueue = true;
                         } else { // jika cost lebih besar, tidak enqueue
                             Enqueue = false;
                         }
                     }
+                    cnt++;
                 }
-
-                for (int j = 0; j < path.size(); j++){
-                    if ((path.get(j).getWord().equals(neighbours.get(i))) && (cost < path.get(j).getCost())){
-                        path.get(j).setParent(node.getWord());
-                        path.get(j).setCost(cost);
-                    }
+                
+                if (idx != -1){
+                    queue.remove(idx);
                 }
                 
                 if (Enqueue && !visited.contains(neighbours.get(i))){
-                    Node newNode = new Node(node.getWord(), neighbours.get(i), cost);
-                    // queue.offer(newNode);
+                    Node newNode = new Node(node.getWord(), neighbours.get(i), cost, node.getDepth() + 1);
                     queue = enqueuePrio(queue, newNode);
-
-                    // for (Node n : queue){
-                    //     n.printNode();
-                    //     System.out.print(" | ");
-                    // }
-                    // System.out.println();
                 }
             }
         }
@@ -351,15 +327,9 @@ public class WordLadder {
         System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
     }
     
-    public float getUCSCost(String nextWord){
-        float g = 0;
-
-        for (int i = 0; i < startWord.length(); i++){
-            if (startWord.charAt(i) != nextWord.charAt(i)){
-                g++;
-            }
-        }
-
+    public float getUCSCost(float prevCost, String nextWord){
+        float g = prevCost;
+        g++;
         return g;
     }
 
@@ -375,19 +345,10 @@ public class WordLadder {
         return h;
     }
     
-    public float getAStarCost(String nextWord){
-        float g = getUCSCost(nextWord);
+    public float getAStarCost(float prevDepth, String nextWord){
+        float g = getUCSCost(prevDepth, nextWord);
         
-        float h = 0;
-
-        for (int i = 0; i < endWord.length(); i++){
-            if (endWord.charAt(i) != nextWord.charAt(i)){
-                h++;
-            }
-            // if ((endWord.charAt(i) == nextWord.charAt(i)) && (startWord.charAt(i) != nextWord.charAt(i))){
-            //     h -= 1;
-            // }
-        }
+        float h = getGBFSCost(nextWord);
 
         return (g + h);
     }
@@ -395,17 +356,20 @@ public class WordLadder {
     public List<String> findShortestPath(List<Node> Path){
         String word = Path.get(Path.size() - 1).getWord();
         String parent = Path.get(Path.size() - 1).getParent();
+        int depth = Path.get(Path.size() - 1).getDepth();
         List<String> shortestPath = new ArrayList<>();
 
         while (parent != null){
             shortestPath.add(0, word);
             for (int i = 0; i < Path.size() - 1; i++){
-                if (Path.get(i).getWord().equals(parent)){
+                if ((Path.get(i).getWord().equals(parent)) && Path.get(i).getDepth() == depth - 1){
                     word = Path.get(i).getWord();
                     parent = Path.get(i).getParent();
+                    depth = Path.get(i).getDepth();
                     break;
                 }
             }
+            // while (true);
         }
 
         if (parent == null){
@@ -415,22 +379,22 @@ public class WordLadder {
         return shortestPath;
     }
 
-    public Queue<Node> enqueuePrio(Queue<Node> queue, Node node){
-        Queue<Node> tempQueue = new LinkedList<>();
+    public List<Node> enqueuePrio(List<Node> queue, Node node){
+        List<Node> tempQueue = new LinkedList<>();
         if (queue.isEmpty()){
-            tempQueue.offer(node);
+            tempQueue.add(node);
         } else {
             boolean inserted = false;
             while (!queue.isEmpty()){
-                Node n = queue.poll();
+                Node n = queue.remove(0);
                 if (node.compareTo(n) == -1 && !inserted){
-                    tempQueue.offer(node);
+                    tempQueue.add(node);
                     inserted = true;
                 }
-                tempQueue.offer(n);
+                tempQueue.add(n);
             }
             if (!inserted){
-                tempQueue.offer(node);
+                tempQueue.add(node);
             }
         }
         return tempQueue;
