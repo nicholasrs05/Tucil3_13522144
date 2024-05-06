@@ -76,6 +76,7 @@ public class WordLadder {
     }
 
     public void findPathUCS(){
+        System.gc();
         List<Node> queue = new LinkedList<>();
         Node startNode = new Node(null, startWord, 0, 0);
         queue = enqueuePrio(queue, startNode);
@@ -85,7 +86,7 @@ public class WordLadder {
         
         long startTime = System.nanoTime();
         Runtime runtime = Runtime.getRuntime();
-        long before = runtime.totalMemory() - runtime.freeMemory();
+        // long before = runtime.totalMemory() - runtime.freeMemory();
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
@@ -114,7 +115,7 @@ public class WordLadder {
                 System.out.println("Langkah         : " + (shortestPath.size() - 1));
                 System.out.println("Kata dikunjungi : " + nodeVisited);
                 System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
-                System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
+                System.out.println("Memori          : " + Math.abs(after) + " bytes");
                 return;
             }
             
@@ -156,10 +157,11 @@ public class WordLadder {
         long endTime = System.nanoTime();
         long after = runtime.totalMemory() - runtime.freeMemory();
         System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
-        System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
+        System.out.println("Memori          : " + Math.abs(after) + " bytes");
     }
 
     public void findPathGBFS(){
+        System.gc();
         List<Node> queue = new LinkedList<>();
         Node startNode = new Node(null, startWord, 0, 0);
         queue = enqueuePrio(queue, startNode);
@@ -169,7 +171,6 @@ public class WordLadder {
         
         long startTime = System.nanoTime();
         Runtime runtime = Runtime.getRuntime();
-        long before = runtime.totalMemory() - runtime.freeMemory();
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
@@ -198,7 +199,7 @@ public class WordLadder {
                 System.out.println("Langkah         : " + (shortestPath.size() - 1));
                 System.out.println("Kata dikunjungi : " + nodeVisited);
                 System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
-                System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
+                System.out.println("Memori          : " + Math.abs(after) + " bytes");
                 return;
             }
             
@@ -240,10 +241,11 @@ public class WordLadder {
         long endTime = System.nanoTime();
         long after = runtime.totalMemory() - runtime.freeMemory();
         System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
-        System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
+        System.out.println("Memori          : " + Math.abs(after) + " bytes");
     }
 
     public void findPathAStar(){
+        System.gc();
         List<Node> queue = new LinkedList<>();
         Node startNode = new Node(null, startWord, 0, 0);
         queue = enqueuePrio(queue, startNode);
@@ -253,7 +255,6 @@ public class WordLadder {
         
         long startTime = System.nanoTime();
         Runtime runtime = Runtime.getRuntime();
-        long before = runtime.totalMemory() - runtime.freeMemory();
 
         while (!queue.isEmpty()){
             // mengambil node dari queue paling depan
@@ -282,7 +283,7 @@ public class WordLadder {
                 System.out.println("Langkah         : " + (shortestPath.size() - 1));
                 System.out.println("Kata dikunjungi : " + nodeVisited);
                 System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
-                System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
+                System.out.println("Memori          : " + Math.abs(after) + " bytes");
                 return;
             }
             
@@ -324,7 +325,7 @@ public class WordLadder {
         long endTime = System.nanoTime();
         long after = runtime.totalMemory() - runtime.freeMemory();
         System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
-        System.out.println("Memori          : " + Math.abs(after - before) + " bytes");
+        System.out.println("Memori          : " + Math.abs(after) + " bytes");
     }
     
     public float getUCSCost(float prevCost, String nextWord){

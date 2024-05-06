@@ -38,7 +38,7 @@ public class WordsReader {
             }
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Data untuk kata dengan panjang " + wordLength + " tidak ditemukan");
         }
     }
 }

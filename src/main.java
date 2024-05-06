@@ -61,7 +61,7 @@ public class Main {
                 }
             }
         } while ((!valid) || (!exists));
-        System.out.println( );
+        System.out.println();
 
         valid = true;
 
