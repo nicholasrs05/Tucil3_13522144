@@ -156,6 +156,7 @@ public class WordLadder {
         System.out.println("Path not found!");
         long endTime = System.nanoTime();
         long after = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Kata dikunjungi : " + nodeVisited);
         System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
         System.out.println("Memori          : " + Math.abs(after) + " bytes");
     }
@@ -240,6 +241,7 @@ public class WordLadder {
         System.out.println("Path not found!");
         long endTime = System.nanoTime();
         long after = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Kata dikunjungi : " + nodeVisited);
         System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
         System.out.println("Memori          : " + Math.abs(after) + " bytes");
     }
@@ -324,6 +326,7 @@ public class WordLadder {
         System.out.println("Path not found!");
         long endTime = System.nanoTime();
         long after = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Kata dikunjungi : " + nodeVisited);
         System.out.println("Waktu pencarian : " + (endTime - startTime) / 1000 + " microdetik");
         System.out.println("Memori          : " + Math.abs(after) + " bytes");
     }
